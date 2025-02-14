@@ -28,6 +28,10 @@ public class Main {
                     if (myScanner.hasNextInt()){
                         int numDays = myScanner.nextInt();
 
+                        for(int i = 0; i < numDays; i++){
+
+                        }
+
                         // Initializes 2 lists that are the size of numDays
                         double[] lowTemp = new double[numDays];
                         double[] highTemp = new double[numDays];
@@ -51,6 +55,8 @@ public class Main {
                             hiTempInput = myScanner.nextDouble();
                         }
 
+                        // Adds hiTempInput to highTemp list
+                        // Replaces any 3.14159 value
                         else{
                             for(int i = 0; i < highTemp.length; i++)
                                 if (highTemp[i] == 3.14159) {
@@ -58,12 +64,25 @@ public class Main {
                                 }
                         }
 
-                        System.out.println(highTemp);
-
                         // Prompts user for the low temp of the day
                         System.out.print("Please enter the lowest temperature of the day: ");
                         lowTempInput = myScanner.nextDouble();
 
+                        // If the input isn't between -45 and 45, prints error and reprompts
+                        if (lowTempInput > 45 || lowTempInput < -45){
+                            System.out.println("Input must be between 45 and -45 degrees");
+                            System.out.print("Please enter the highest temperature of the day: ");
+                            lowTempInput = myScanner.nextDouble();
+                        }
+
+                        // Adds lowTempInput to lowTemp list
+                        // Replaces any 3.14159 value
+                        else{
+                            for(int i = 0; i < lowTemp.length; i++)
+                                if (lowTemp[i] == 3.14159) {
+                                    lowTemp[i] = lowTempInput;
+                                }
+                        }
 
                     }
 
