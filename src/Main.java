@@ -1,5 +1,7 @@
+import java.util.stream.*;
 import java.util.Arrays;
 import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -111,25 +113,24 @@ public class Main {
             if (menuOption == 2) {
                 double minTemp = 0;
 
-                for(int j = 0; j > 366; j++){
+                for(int j = 0; j < 366; j++){
                     if (highTemp[j] > minTemp);
                     hightemp[j] = minTemp;
                 } // Closes for loop
 
-                for(int k = 0; k > 366; k++){
+                for(int k = 0; k < 366; k++){
                     if (lowTemp[k] > minTemp);
                     lowTemp[k] = minTemp;
                 } // Closes for loop
 
-
                 double maxTemp = 0;
 
-                for(int h = 0; h > 366; h++){
+                for(int h = 0; h < 366; h++){
                     if (highTemp[h] > maxTemp);
-                    hightemp[h] = maxTemp;
+                    highTemp[h] = maxTemp;
                 } // Closes for loop
 
-                for(int g = 0; g > 366; g++){
+                for(int g = 0; g < 366; g++){
                     if (lowTemp[g] > maxTemp);
                     lowTemp[g] = maxTemp;
                 }
@@ -139,10 +140,19 @@ public class Main {
             }
 
             if (menuOption == 3) {
+
+                // Stole this
+                // https://stackoverflow.com/questions/4550662/how-do-you-find-the-sum-of-all-the-numbers-in-an-array-in-java
+                double sumHigh = DoubleStream.of(highTemp).sum();
+                double sumLow = DoubleStream.of(lowTemp).sum();
+                double totalSum = sumHigh + sumLow;
+                double avgTemp = totalSum / highTemp.length();
+
+
                 System.out.println("Stats for all days:\n" +
-                        "Max temp:" +
-                        "Min temp:" +
-                        "Avg temp:");
+                        "Max temp:" + maxTemp +
+                        "Min temp:" + minTemp +
+                        "Avg temp: " + avgTemp);
             }
 
 
