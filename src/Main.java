@@ -26,6 +26,10 @@ public class Main{
             // If user does not enter an int, prints an error message and loops again
             else {
                 System.out.println("Input must be a whole number.");
+
+                // I don't know what this even does but stackoverflow said it would stop me from having an infinite loop
+                // and they were right
+                myScanner.next();
             }
         }
         ;
