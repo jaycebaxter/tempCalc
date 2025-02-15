@@ -1,3 +1,8 @@
+// Program:                 Temperature Calculator
+// Author:                  Jayce Baxter
+// Date:                    February 14th, 2025
+// Description:             Calculates the minimum, maximum and average temperatures given by the user
+
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
@@ -34,6 +39,8 @@ public class Main{
 
         // Sets validDays to false so we can use it for validation, turns to true when input is correct
         boolean validDays = false;
+        boolean validHiTemp = false;
+        boolean validLowTemp = false;
 
         // Initializes numDays because it was out of reach
         int numDays = 0;
@@ -45,6 +52,7 @@ public class Main{
             System.out.println("How many days would you like to input? ");
 
             // If user enters an int, assigns that value to numDays variable and exits loop
+            // Also validates that it is between 1 and 365
             if (myScanner.hasNextInt()) {
                 numDays = myScanner.nextInt();
                 if (numDays > MIN_DAYS && numDays < MAX_DAYS){
@@ -131,7 +139,7 @@ public class Main{
             double maxTemp = highTemp[highTempLastIndex];
 
             // Finds the length of the totalTemp list
-            int totalTempLength = totalTemp.length;
+            int totalTempLength = totalTemp.length * 2;
 
             // Calculating sum of totalTemp stolen from stackoverflow
             // https://stackoverflow.com/questions/4550662/how-do-you-find-the-sum-of-all-the-numbers-in-an-array-in-java
