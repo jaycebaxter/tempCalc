@@ -1,6 +1,13 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Main{
+
+    // Setting unchanged values as constants
+    public static final int MIN_DAYS = 0;
+    public static final int MAX_DAYS = 366;
+    public static final double MIN_TEMP = -45.00;
+    public static final double MAX_TEMP = 45.00;
 
         // Obviously this is stolen
         // https://www.tpointtech.com/bubble-sort-in-java
@@ -22,6 +29,8 @@ public class Main{
         public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
 
+        // Setting decimalformat to 2 decimal places
+            DecimalFormat roundedDecimal = new DecimalFormat("#.##");
 
         // Sets validDays to false so we can use it for validation, turns to true when input is correct
         boolean validDays = false;
@@ -38,7 +47,7 @@ public class Main{
             // If user enters an int, assigns that value to numDays variable and exits loop
             if (myScanner.hasNextInt()) {
                 numDays = myScanner.nextInt();
-                if (numDays > 0 && numDays < 366){
+                if (numDays > MIN_DAYS && numDays < MAX_DAYS){
                     validDays = true;
                 }
                 else{
@@ -60,6 +69,7 @@ public class Main{
         // Initializes variables and lists
         double[] lowTemp = new double[numDays];
         double[] highTemp = new double[numDays];
+        double[] totalTemp = new double[numDays];
 
         // Loops for the amount of days in numDays
         for (int i = 0; i < numDays; i++) {
@@ -69,7 +79,7 @@ public class Main{
             double hiTempInput = myScanner.nextDouble();
 
             // If the input isn't between -45 and 45, prints error and reprompts
-            while (hiTempInput > 45 || hiTempInput < -45) {
+            while (hiTempInput > MAX_TEMP || hiTempInput < MIN_TEMP) {
                 System.out.println("Input must be between 45 and -45 degrees");
                 System.out.print("Please enter the highest temperature of the day: ");
                 hiTempInput = myScanner.nextDouble();
@@ -89,18 +99,23 @@ public class Main{
             }
 
             // If the input isn't between -45 and 45, prints error and reprompts
-            while (lowTempInput > 45 || lowTempInput < -45) {
+            while (lowTempInput > MAX_TEMP || lowTempInput < MIN_TEMP) {
                 System.out.println("Input must be between 45 and -45 degrees");
-                System.out.print("Please enter the highest temperature of the day: ");
+                System.out.print("Please enter the lowest temperature of the day: ");
                 lowTempInput = myScanner.nextDouble();
             }
 
+            // Calculates average daily temp
             double avgDailyTemp = (lowTempInput + hiTempInput) / 2;
 
-            System.out.println("The average temperature for today was " + avgDailyTemp + "\n");
+            // Prints average daily temp
+            System.out.println("The average temperature for today was " + roundedDecimal.format(avgDailyTemp) + "\n");
 
             // If all checks pass, assigns the current index in lowTemp to the value of lowTempInput
             lowTemp[i] = lowTempInput;
+
+            // Adds highTemp and lowTemp together and adds to totalTemp
+            totalTemp[i] = hiTempInput + lowTempInput;
 
         } // Closes for loop
 
@@ -108,9 +123,30 @@ public class Main{
             bubbleSort(highTemp);
             bubbleSort(lowTemp);
 
+            // Sets the minimum temperature to be the lowest on the list
             double minTemp = lowTemp[0];
+
+            // Sets the maximum temperature to be the highest on the list
             int highTempLastIndex = highTemp.length - 1;
             double maxTemp = highTemp[highTempLastIndex];
+
+            // Finds the length of the totalTemp list
+            int totalTempLength = totalTemp.length;
+
+            // Calculating sum of totalTemp stolen from stackoverflow
+            // https://stackoverflow.com/questions/4550662/how-do-you-find-the-sum-of-all-the-numbers-in-an-array-in-java
+            double sum = 0;
+            for (double i : totalTemp)
+                sum += i;
+
+            // Calculates the total average
+            double totalAvg = sum / totalTempLength;
+
+            // Prints output to the user
+            System.out.println("Over the course of " + numDays + " days:\n" +
+                    "The maximum recorded temperature was " + roundedDecimal.format(maxTemp) + "\n" +
+                    "The minimum recorded temperature was " + roundedDecimal.format(minTemp) + "\n" +
+                    "The average temperature was " + roundedDecimal.format(totalAvg));
 
     } // Closes public static void main
 } // Closes public class main
