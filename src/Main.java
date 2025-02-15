@@ -39,8 +39,6 @@ public class Main{
 
         // Sets validDays to false so we can use it for validation, turns to true when input is correct
         boolean validDays = false;
-        boolean validHiTemp = false;
-        boolean validLowTemp = false;
 
         // Initializes numDays because it was out of reach
         int numDays = 0;
@@ -113,14 +111,14 @@ public class Main{
                 lowTempInput = myScanner.nextDouble();
             }
 
+            // If all checks pass, assigns the current index in lowTemp to the value of lowTempInput
+            lowTemp[i] = lowTempInput;
+
             // Calculates average daily temp
             double avgDailyTemp = (lowTempInput + hiTempInput) / 2;
 
             // Prints average daily temp
             System.out.println("The average temperature for today was " + roundedDecimal.format(avgDailyTemp) + "\n");
-
-            // If all checks pass, assigns the current index in lowTemp to the value of lowTempInput
-            lowTemp[i] = lowTempInput;
 
             // Adds highTemp and lowTemp together and adds to totalTemp
             totalTemp[i] = hiTempInput + lowTempInput;
@@ -152,9 +150,9 @@ public class Main{
 
             // Prints output to the user
             System.out.println("Over the course of " + numDays + " days:\n" +
-                    "The maximum recorded temperature was " + roundedDecimal.format(maxTemp) + "\n" +
-                    "The minimum recorded temperature was " + roundedDecimal.format(minTemp) + "\n" +
-                    "The average temperature was " + roundedDecimal.format(totalAvg));
+                    "The maximum recorded temperature was " + roundedDecimal.format(maxTemp) + "°\n" +
+                    "The minimum recorded temperature was " + roundedDecimal.format(minTemp) + "°\n" +
+                    "The average temperature was " + roundedDecimal.format(totalAvg) + "°");
 
     } // Closes public static void main
 } // Closes public class main
